@@ -1,0 +1,98 @@
+Certainly! Below is a step-by-step algorithm for implementing a descending priority queue in C:
+
+1. **Initialize Descending Priority Queue:**
+   - Set `rear` to -1.
+
+2. **Check if Descending Priority Queue is Full (isFull):**
+   - If `(rear == MAX_SIZE - 1)`, the descending priority queue is full.
+
+3. **Check if Descending Priority Queue is Empty (isEmpty):**
+   - If `(rear == -1)`, the descending priority queue is empty.
+
+4. **Insert Operation:**
+   - If the descending priority queue is full, print an error message.
+   - Prompt the user for the value to be inserted.
+   - Find the correct position to maintain descending order (higher values have higher priority).
+   - Shift elements to the right to make space for the new value.
+   - Insert the value at the correct position.
+   - Update `rear`.
+
+5. **Delete Operation:**
+   - If the descending priority queue is empty, print an error message.
+   - Delete the last element in the descending priority queue.
+   - Update `rear`.
+   - Print the deleted value.
+
+6. **Display Operation:**
+   - If the descending priority queue is empty, print an appropriate message.
+   - Display the elements of the descending priority queue.
+
+7. **Main Program Loop:**
+   - Display a menu to the user with options for insert, delete, display, and exit.
+   - Based on the user's choice, call the corresponding operation function.
+
+8. **Exit Program:**
+   - If the user chooses to exit, end the program.
+
+Here's a pseudocode representation of the algorithm:
+
+```plaintext
+function initializeDescendingPriorityQueue(queue):
+    queue.rear = -1
+
+function isFull(queue):
+    return (queue.rear == MAX_SIZE - 1)
+
+function isEmpty(queue):
+    return (queue.rear == -1)
+
+function insert(queue, value):
+    if isFull(queue):
+        print "Descending Priority Queue is full. Cannot insert value."
+    else:
+        i = queue.rear
+        while i >= 0 and value > queue.items[i]:
+            queue.items[i + 1] = queue.items[i]
+            i--
+        queue.items[i + 1] = value
+        queue.rear++
+        print "Inserted", value, "into the descending priority queue."
+
+function delete(queue):
+    if isEmpty(queue):
+        print "Descending Priority Queue is empty. Cannot delete."
+        return -1
+    else:
+        deletedValue = queue.items[queue.rear]
+        queue.rear--
+        print "Deleted", deletedValue, "from the descending priority queue."
+        return deletedValue
+
+function display(queue):
+    if isEmpty(queue):
+        print "Descending Priority Queue is empty."
+    else:
+        print "Descending Priority Queue elements: "
+        for i = 0 to queue.rear:
+            print queue.items[i]
+
+function main():
+    initializeDescendingPriorityQueue(queue)
+    loop:
+        displayMenu()
+        read userChoice
+        switch userChoice:
+            case 1:
+                read value
+                insert(queue, value)
+            case 2:
+                delete(queue)
+            case 3:
+                display(queue)
+            case 4:
+                exit program
+            default:
+                print "Invalid choice. Please enter a valid option."
+```
+
+Note: You need to replace `print` with the appropriate output statements for the language you are using (e.g., `printf` in C). Additionally, `MAX_SIZE` is assumed to be a constant representing the maximum size of the descending priority queue.
