@@ -1,5 +1,5 @@
 Certainly! Here's a step-by-step algorithm to determine if an input string is of the form "x C y" using a stack:
-
+https://github.com/tejas-2000/tejas-2000/edit/LAB/string%20x%20C%20y.txt
 1. Create an empty stack to store characters.
 
 2. Scan the first half of the input string and push each character onto the stack.
