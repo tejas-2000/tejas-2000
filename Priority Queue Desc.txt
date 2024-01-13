@@ -1,0 +1,113 @@
+Certainly! Here's a step-by-step algorithm for implementing insert, delete, and display operations on a priority queue with three queues:
+
+1. **Initialize Priority Queues:**
+   - Set `front1`, `rear1`, `front2`, `rear2`, `front3`, and `rear3` to -1.
+
+2. **Check if Priority Queues are Full (isFull):**
+   - If `(rear1 == MAX_SIZE - 1) || (rear2 == MAX_SIZE - 1) || (rear3 == MAX_SIZE - 1)`, the priority queues are full.
+
+3. **Check if Priority Queues are Empty (isEmpty):**
+   - If `(front1 == -1) && (front2 == -1) && (front3 == -1)`, the priority queues are empty.
+
+4. **Insert Operation:**
+   - If the priority queues are full, print an error message.
+   - Prompt the user for the value and its priority (1, 2, or 3).
+   - Based on the priority, insert the value into the corresponding queue.
+   - Update the front and rear of the respective queue.
+
+5. **Delete Operation:**
+   - If the priority queues are empty, print an error message.
+   - Check each queue in order (queue1, queue2, queue3) and delete the first element from the first non-empty queue.
+   - Update the front and rear of the respective queue.
+   - Print the deleted value.
+
+6. **Display Operation:**
+   - If the priority queues are empty, print an appropriate message.
+   - Display the elements of each queue separately.
+
+7. **Main Program Loop:**
+   - Display a menu to the user with options for insert, delete, display, and exit.
+   - Based on the user's choice, call the corresponding operation function.
+
+8. **Exit Program:**
+   - If the user chooses to exit, end the program.
+
+Here's a pseudocode representation of the algorithm:
+
+```plaintext
+function initializePriorityQueues(pq):
+    pq.front1 = pq.rear1 = -1
+    pq.front2 = pq.rear2 = -1
+    pq.front3 = pq.rear3 = -1
+
+function isFull(pq):
+    return (pq.rear1 == MAX_SIZE - 1) || (pq.rear2 == MAX_SIZE - 1) || (pq.rear3 == MAX_SIZE - 1)
+
+function isEmpty(pq):
+    return (pq.front1 == -1) && (pq.front2 == -1) && (pq.front3 == -1)
+
+function insert(pq, value, priority):
+    if isFull(pq):
+        print "Priority Queues are full. Cannot insert value."
+    else:
+        switch priority:
+            case 1:
+                if pq.rear1 == -1:
+                    pq.front1 = pq.rear1 = 0
+                else:
+                    pq.rear1++
+                pq.queue1[pq.rear1] = value
+            case 2:
+                // Similar logic for queue2
+            case 3:
+                // Similar logic for queue3
+            default:
+                print "Invalid priority. Please enter 1, 2, or 3."
+
+function delete(pq):
+    if isEmpty(pq):
+        print "Priority Queues are empty. Cannot delete."
+    else:
+        if pq.front1 != -1:
+            deletedValue = pq.queue1[pq.front1]
+            if pq.front1 == pq.rear1:
+                pq.front1 = pq.rear1 = -1
+            else:
+                pq.front1++
+        else if pq.front2 != -1:
+            // Similar logic for queue2
+        else:
+            // Similar logic for queue3
+        print "Deleted", deletedValue, "from the priority queues."
+
+function display(pq):
+    if isEmpty(pq):
+        print "Priority Queues are empty."
+    else:
+        print "Priority Queue 1: "
+        // Display elements of queue1
+        print "Priority Queue 2: "
+        // Display elements of queue2
+        print "Priority Queue 3: "
+        // Display elements of queue3
+
+function main():
+    initializePriorityQueues(pq)
+    loop:
+        displayMenu()
+        read userChoice
+        switch userChoice:
+            case 1:
+                read value, priority
+                insert(pq, value, priority)
+            case 2:
+                delete(pq)
+            case 3:
+                display(pq)
+            case 4:
+                exit program
+            default:
+                print "Invalid choice. Please enter a valid option."
+```
+
+Note: You need to replace `print` with the appropriate output statements for the language you are using (e.g., `printf` in C). Additionally, `MAX_SIZE` is assumed to be a constant representing the maximum size of each queue.
