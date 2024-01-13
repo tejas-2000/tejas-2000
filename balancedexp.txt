@@ -1,0 +1,42 @@
+Certainly! The provided C program checks if a given expression has balanced parentheses using a stack. Below is the algorithm for the program:
+
+**Algorithm: Parentheses Matching Using Stack**
+
+1. **Initialize Stack:**
+   - Create a global stack of sufficient size (MAX) and initialize the top of the stack (`top`) to -1.
+
+2. **Function Declarations:**
+   - Declare functions for pushing (`push`) and popping (`pop`) elements from the stack.
+   - Declare functions for checking matching pairs of parentheses (`match`) and for checking the overall validity of the expression (`check`).
+
+3. **Main Function:**
+   - Read the input expression (`exp`) from the user.
+   - Call the `check` function, passing the expression as an argument.
+
+4. **Check Function (`check`):**
+   - Iterate through each character of the expression (`exp`).
+   - If an open parenthesis ('(', '{', or '[') is encountered, push it onto the stack using the `push` function.
+   - If a close parenthesis (')', '}', or ']') is encountered:
+      - If the stack is empty (`top==-1`), print an error message indicating that there are more closing parentheses than opening ones, and return 0 (invalid).
+      - Pop the last pushed element from the stack using the `pop` function.
+      - Check if the popped element and the current closing parenthesis form a matching pair using the `match` function.
+         - If they don't match, print an error message indicating the mismatch and return 0 (invalid).
+   - After processing the entire expression, check the final state of the stack:
+      - If the stack is empty (`top==-1`), print "Balanced Parentheses" and return 1 (valid).
+      - If the stack is not empty, print an error message indicating that there are more opening parentheses than closing ones, and return 0 (invalid).
+
+5. **Match Function (`match`):**
+   - Check if the provided characters (`a` and `b`) form a matching pair of parentheses.
+   - Return 1 if they match (valid), and 0 otherwise.
+
+6. **Push Function (`push`):**
+   - Check if the stack is full (`top == MAX - 1`).
+      - If it is, print "Stack Overflow" and return.
+   - Increment `top` and push the provided item onto the stack.
+
+7. **Pop Function (`pop`):**
+   - Check if the stack is empty (`top == -1`).
+      - If it is, print "Stack Underflow," exit the program with an error code.
+   - Return the element at the top of the stack and decrement `top`.
+
+This algorithm helps ensure that the parentheses in the expression are balanced, and it provides appropriate messages if there are mismatches or if there are more opening or closing parentheses.
