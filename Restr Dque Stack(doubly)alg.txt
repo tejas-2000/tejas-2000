@@ -1,0 +1,105 @@
+Certainly! Below is a step-by-step algorithm for implementing stack operations using an Input Restricted Deque (double-ended queue) with `insertqfront()`, `remvleft()`, and `displayq()` operations in C:
+
+1. **Initialize Deque:**
+   - Set `front` and `rear` to -1.
+
+2. **Check if Deque is Full (isFull):**
+   - If `(front == 0 && rear == MAX_SIZE - 1)` or `(front == rear + 1)`, the deque is full.
+
+3. **Check if Deque is Empty (isEmpty):**
+   - If `(front == -1)`, the deque is empty.
+
+4. **Push Operation (insertqfront):**
+   - If the deque is full, print an error message.
+   - If the deque is empty, set `front` and `rear` to 0.
+   - If `front` is already at the beginning, set it to the end of the deque.
+   - Otherwise, decrement `front` by 1.
+   - Insert the value at the updated `front` position.
+
+5. **Pop Operation (remvleft):**
+   - If the deque is empty, print an error message.
+   - Get the item to be popped from the current `front` position.
+   - If `front` is equal to `rear`, indicating the last element, initialize the deque.
+   - Otherwise, increment `front` in a circular manner.
+
+6. **Display Operation (displayq):**
+   - If the deque is empty, print an appropriate message.
+   - Display the elements of the deque starting from `front` in a circular manner up to `rear`.
+
+7. **Main Program Loop:**
+   - Display a menu to the user with options for push, pop, display, and exit.
+   - Based on the user's choice, call the corresponding operation function.
+
+8. **Exit Program:**
+   - If the user chooses to exit, end the program.
+
+Here's a pseudocode representation of the algorithm:
+
+```plaintext
+function initializeDeque(deque):
+    deque.front = -1
+    deque.rear = -1
+
+function isFull(deque):
+    return (deque.front == 0 && deque.rear == MAX_SIZE - 1) or (deque.front == deque.rear + 1)
+
+function isEmpty(deque):
+    return (deque.front == -1)
+
+function insertqfront(deque, value):
+    if isFull(deque):
+        print "Deque is full. Cannot push onto the stack."
+    else:
+        if isEmpty(deque):
+            deque.front = 0
+            deque.rear = 0
+        else if deque.front == 0:
+            deque.front = MAX_SIZE - 1
+        else:
+            deque.front--
+        deque.items[deque.front] = value
+        print "Pushed", value, "onto the stack."
+
+function remvleft(deque):
+    if isEmpty(deque):
+        print "Stack is empty. Cannot pop from the stack."
+        return -1
+    else:
+        poppedItem = deque.items[deque.front]
+        if deque.front == deque.rear:
+            initializeDeque(deque)
+        else:
+            deque.front = (deque.front + 1) % MAX_SIZE
+        print "Popped", poppedItem, "from the stack."
+        return poppedItem
+
+function displayq(deque):
+    if isEmpty(deque):
+        print "Stack is empty."
+    else:
+        print "Stack elements: "
+        i = deque.front
+        while i != (deque.rear + 1) % MAX_SIZE:
+            print deque.items[i]
+            i = (i + 1) % MAX_SIZE
+
+function main():
+    initializeDeque(deque)
+    loop:
+        displayMenu()
+        read userChoice
+        switch userChoice:
+            case 1:
+                read value
+                insertqfront(deque, value)
+            case 2:
+                remvleft(deque)
+            case 3:
+                displayq(deque)
+            case 4:
+                exit program
+            default:
+                print "Invalid choice. Please enter a valid option."
+```
+
+Note: You need to replace `print` with the appropriate output statements for the language you are using (e.g., `printf` in C). Additionally, `MAX_SIZE` is assumed to be a constant representing the maximum size of the deque.
