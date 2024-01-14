@@ -1,98 +1,65 @@
-Certainly! Below is a step-by-step algorithm for implementing a descending priority queue in C:
+Certainly! Below is the algorithm for a descending priority queue implemented using an array with a `front` and `rear` index.
 
-1. **Initialize Descending Priority Queue:**
-   - Set `rear` to -1.
+### Algorithm:
 
-2. **Check if Descending Priority Queue is Full (isFull):**
-   - If `(rear == MAX_SIZE - 1)`, the descending priority queue is full.
+1. **Initialize Queue:**
+   - Set `front` and `rear` to -1.
 
-3. **Check if Descending Priority Queue is Empty (isEmpty):**
-   - If `(rear == -1)`, the descending priority queue is empty.
+2. **Check if Queue is Full:**
+   - Use `isFull` function to check if `rear` is at the last index (`MAX_SIZE - 1`). If true, the queue is full.
 
-4. **Insert Operation:**
-   - If the descending priority queue is full, print an error message.
-   - Prompt the user for the value to be inserted.
-   - Find the correct position to maintain descending order (higher values have higher priority).
-   - Shift elements to the right to make space for the new value.
-   - Insert the value at the correct position.
-   - Update `rear`.
+3. **Check if Queue is Empty:**
+   - Use `isEmpty` function to check if `front` is -1. If true, the queue is empty.
 
-5. **Delete Operation:**
-   - If the descending priority queue is empty, print an error message.
-   - Delete the last element in the descending priority queue.
-   - Update `rear`.
-   - Print the deleted value.
+4. **Insert Element:**
+   - Use `insert` function:
+      - Check if the queue is full.
+      - If `front` is -1, set `front` to 0.
+      - Starting from the `rear`, shift elements to the right until finding the correct position for the new element based on priority.
+      - Increment `rear`.
 
-6. **Display Operation:**
-   - If the descending priority queue is empty, print an appropriate message.
-   - Display the elements of the descending priority queue.
+5. **Delete First Element:**
+   - Use `deleteFirst` function:
+      - Check if the queue is empty.
+      - Store the value of the first element (at index `front`).
+      - Shift the remaining elements to the left.
+      - If `front` becomes greater than `rear`, set `front` and `rear` to -1 (indicating an empty queue).
 
-7. **Main Program Loop:**
-   - Display a menu to the user with options for insert, delete, display, and exit.
-   - Based on the user's choice, call the corresponding operation function.
+6. **Display Elements:**
+   - Use `display` function:
+      - Check if the queue is empty.
+      - Display elements from `front` to `rear`.
 
-8. **Exit Program:**
-   - If the user chooses to exit, end the program.
+### Functions:
 
-Here's a pseudocode representation of the algorithm:
+- **initialize:**
+   - Set `front` and `rear` to -1.
 
-```plaintext
-function initializeDescendingPriorityQueue(queue):
-    queue.rear = -1
+- **isFull:**
+   - Return true if `rear` is at the last index (`MAX_SIZE - 1`), else false.
 
-function isFull(queue):
-    return (queue.rear == MAX_SIZE - 1)
+- **isEmpty:**
+   - Return true if `front` is -1, else false.
 
-function isEmpty(queue):
-    return (queue.rear == -1)
+- **insert:**
+   - Check if the queue is full.
+   - If `front` is -1, set `front` to 0.
+   - Starting from `rear`, shift elements to the right until finding the correct position for the new element based on priority.
+   - Increment `rear`.
 
-function insert(queue, value):
-    if isFull(queue):
-        print "Descending Priority Queue is full. Cannot insert value."
-    else:
-        i = queue.rear
-        while i >= 0 and value > queue.items[i]:
-            queue.items[i + 1] = queue.items[i]
-            i--
-        queue.items[i + 1] = value
-        queue.rear++
-        print "Inserted", value, "into the descending priority queue."
+- **deleteFirst:**
+   - Check if the queue is empty.
+   - Store the value of the first element.
+   - Shift the remaining elements to the left.
+   - If `front` becomes greater than `rear`, set `front` and `rear` to -1.
 
-function delete(queue):
-    if isEmpty(queue):
-        print "Descending Priority Queue is empty. Cannot delete."
-        return -1
-    else:
-        deletedValue = queue.items[queue.rear]
-        queue.rear--
-        print "Deleted", deletedValue, "from the descending priority queue."
-        return deletedValue
+- **display:**
+   - Check if the queue is empty.
+   - Display elements from `front` to `rear`.
 
-function display(queue):
-    if isEmpty(queue):
-        print "Descending Priority Queue is empty."
-    else:
-        print "Descending Priority Queue elements: "
-        for i = 0 to queue.rear:
-            print queue.items[i]
+### Time Complexity:
+- **Insertion and Deletion:**
+   - O(N) in the worst case, where N is the number of elements in the queue.
+   - However, if the elements are mostly sorted, the time complexity can be closer to O(1).
 
-function main():
-    initializeDescendingPriorityQueue(queue)
-    loop:
-        displayMenu()
-        read userChoice
-        switch userChoice:
-            case 1:
-                read value
-                insert(queue, value)
-            case 2:
-                delete(queue)
-            case 3:
-                display(queue)
-            case 4:
-                exit program
-            default:
-                print "Invalid choice. Please enter a valid option."
-```
-
-Note: You need to replace `print` with the appropriate output statements for the language you are using (e.g., `printf` in C). Additionally, `MAX_SIZE` is assumed to be a constant representing the maximum size of the descending priority queue.
+This algorithm provides a basic outline for implementing a descending priority queue using an array with the `front` and `rear` indices.
