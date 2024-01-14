@@ -5,10 +5,12 @@
 
 struct AscendingPriorityQueue {
     int items[MAX_SIZE];
+    int front;
     int rear;
 };
 
 void initialize(struct AscendingPriorityQueue *queue) {
+    queue->front = -1;
     queue->rear = -1;
 }
 
@@ -17,7 +19,7 @@ int isFull(struct AscendingPriorityQueue *queue) {
 }
 
 int isEmpty(struct AscendingPriorityQueue *queue) {
-    return (queue->rear == -1);
+    return (queue->front == -1);
 }
 
 void insert(struct AscendingPriorityQueue *queue, int value) {
@@ -35,18 +37,30 @@ void insert(struct AscendingPriorityQueue *queue, int value) {
 
     queue->items[i + 1] = value;
     queue->rear++;
+    if (queue->front == -1) {
+        queue->front = 0; // Update front when inserting the first element
+    }
 
     printf("Inserted %d into the ascending priority queue.\n", value);
 }
 
-int delete(struct AscendingPriorityQueue *queue) {
+int deleteFirst(struct AscendingPriorityQueue *queue) {
     if (isEmpty(queue)) {
         printf("Ascending Priority Queue is empty. Cannot delete.\n");
         return -1;
     }
 
-    int deletedItem = queue->items[queue->rear];
+    int deletedItem = queue->items[queue->front];
+
+    for (int i = queue->front; i < queue->rear; i++) {
+        queue->items[i] = queue->items[i + 1];
+    }
+
     queue->rear--;
+
+    if (queue->front > queue->rear) {
+        queue->front = -1; // Reset front when deleting the last element
+    }
 
     printf("Deleted %d from the ascending priority queue.\n", deletedItem);
     return deletedItem;
@@ -59,7 +73,7 @@ void display(struct AscendingPriorityQueue *queue) {
     }
 
     printf("Ascending Priority Queue elements: ");
-    for (int i = 0; i <= queue->rear; i++) {
+    for (int i = queue->front; i <= queue->rear; i++) {
         printf("%d ", queue->items[i]);
     }
     printf("\n");
@@ -74,7 +88,7 @@ int main() {
     do {
         printf("\nAscending Priority Queue Operations:\n");
         printf("1. Insert\n");
-        printf("2. Delete\n");
+        printf("2. Delete first element\n");
         printf("3. Display\n");
         printf("4. Exit\n");
         printf("Enter your choice: ");
@@ -87,7 +101,7 @@ int main() {
                 insert(&queue, value);
                 break;
             case 2:
-                value = delete(&queue);
+                value = deleteFirst(&queue);
                 if (value != -1) {
                     printf("Deleted %d from the ascending priority queue.\n", value);
                 }
