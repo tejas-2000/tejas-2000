@@ -23,6 +23,15 @@ void addElement(int list[], int *size, int element) {
     }
 }
 
+// Function to display the elements of the list
+void displayList(int list[], int size) {
+    printf("List elements: ");
+    for (int i = 0; i < size; ++i) {
+        printf("%d ", list[i]);
+    }
+    printf("\n");
+}
+
 int main() {
     int list[MAX_SIZE];
     int size = 0;
@@ -37,6 +46,9 @@ int main() {
         scanf("%d", &list[i]);
     }
 
+    // Display the original list
+    displayList(list, size);
+
     // Input the element to search or add
     printf("Enter the element to search or add: ");
     scanf("%d", &element);
@@ -49,6 +61,8 @@ int main() {
     } else {
         // Element not found, add it to the list
         addElement(list, &size, element);
+        // Display the updated list
+        displayList(list, size);
     }
 
     return 0;
