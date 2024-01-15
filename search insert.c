@@ -1,68 +1,100 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-#define MAX_SIZE 100
+// Define a structure for a node in the linked list
+struct Node {
+    int data;
+    struct Node* next;
+};
 
-// Function to search for an element in the list
-int search(int list[], int size, int key) {
-    for (int i = 0; i < size; ++i) {
-        if (list[i] == key) {
-            return i; // Element found, return position
+// Function to search for an element in the linked list
+int search(struct Node* head, int key) {
+    int position = 0;
+    struct Node* current = head;
+
+    while (current != NULL) {
+        if (current->data == key) {
+            return position; // Element found, return position
         }
+        current = current->next;
+        position++;
     }
+
     return -1; // Element not found
 }
 
-// Function to add an element to the list
-void addElement(int list[], int *size, int element) {
-    if (*size < MAX_SIZE) {
-        list[*size] = element;
-        (*size)++;
-        printf("Element added to the list.\n");
+// Function to add an element to the end of the linked list
+struct Node* addElement(struct Node* head, int element) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = element;
+    newNode->next = NULL;
+
+    if (head == NULL) {
+        // If the list is empty, make the new node the head
+        head = newNode;
     } else {
-        printf("List is full. Cannot add more elements.\n");
+        // Otherwise, traverse the list to find the last node and add the new node
+        struct Node* current = head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
     }
+
+    printf("Element added to the list.\n");
+    return head;
 }
 
-// Function to display the elements of the list
-void displayList(int list[], int size) {
+// Function to display the elements of the linked list
+void displayList(struct Node* head) {
     printf("List elements: ");
-    for (int i = 0; i < size; ++i) {
-        printf("%d ", list[i]);
+    struct Node* current = head;
+    while (current != NULL) {
+        printf("%d ", current->data);
+        current = current->next;
     }
     printf("\n");
 }
 
 int main() {
-    int list[MAX_SIZE];
-    int size = 0;
+    struct Node* head = NULL;
     int element, position;
 
-    // Input elements into the list (you can modify this part as needed)
-    printf("Enter the number of elements in the list: ");
-    scanf("%d", &size);
-
-    printf("Enter the elements of the list:\n");
-    for (int i = 0; i < size; ++i) {
-        scanf("%d", &list[i]);
+    // Input elements into the linked list
+    printf("Enter the elements of the list (enter -1 to stop):\n");
+    while (1) {
+        scanf("%d", &element);
+        if (element == -1) {
+            break;
+        }
+        head = addElement(head, element);
     }
 
-    // Display the original list
-    displayList(list, size);
+    // Display the original linked list
+    displayList(head);
 
     // Input the element to search or add
     printf("Enter the element to search or add: ");
     scanf("%d", &element);
 
-    // Search for the element in the list
-    position = search(list, size, element);
+    // Search for the element in the linked list
+    position = search(head, element);
 
     if (position != -1) {
         printf("Element found at position %d.\n", position + 1);
     } else {
-        // Element not found, add it to the list
-        addElement(list, &size, element);
-        // Display the updated list
-        displayList(list, size);
+        // Element not found, add it to the linked list
+        head = addElement(head, element);
+        // Display the updated linked list
+        displayList(head);
+    }
+
+    // Free the memory allocated for the linked list
+    struct Node* current = head;
+    while (current != NULL) {
+        struct Node* nextNode = current->next;
+        free(current);
+        current = nextNode;
     }
 
     return 0;
