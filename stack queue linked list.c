@@ -39,6 +39,16 @@ int pop(struct Stack* stack) {
     return data;
 }
 
+void displayStack(struct Stack* stack) {
+    printf("Stack: ");
+    struct Node* current = stack->top;
+    while (current != NULL) {
+        printf("%d ", current->data);
+        current = current->next;
+    }
+    printf("\n");
+}
+
 void enqueue(struct Queue* queue, int data) {
     struct Node* newNode = createNode(data);
     if (queue->rear == NULL) {
@@ -64,13 +74,24 @@ int dequeue(struct Queue* queue) {
     return data;
 }
 
+void displayQueue(struct Queue* queue) {
+    printf("Queue: ");
+    struct Node* current = queue->front;
+    while (current != NULL) {
+        printf("%d ", current->data);
+        current = current->next;
+    }
+    printf("\n");
+}
+
 void displayMenu() {
     printf("\nMenu:\n");
     printf("1. Push to Stack\n");
     printf("2. Pop from Stack\n");
     printf("3. Enqueue to Queue\n");
     printf("4. Dequeue from Queue\n");
-    printf("5. Exit\n");
+    printf("5. Display Stack and Queue\n");
+    printf("6. Exit\n");
     printf("Enter your choice: ");
 }
 
@@ -104,13 +125,17 @@ int main() {
                 printf("Dequeued from queue: %d\n", dequeue(&queue));
                 break;
             case 5:
+                displayStack(&stack);
+                displayQueue(&queue);
+                break;
+            case 6:
                 printf("Exiting program.\n");
                 break;
             default:
                 printf("Invalid choice. Please enter a valid option.\n");
         }
 
-    } while (choice != 5);
+    } while (choice != 6);
 
     return 0;
 }
