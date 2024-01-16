@@ -1,0 +1,65 @@
+Certainly! Below is the algorithm for an ascending priority queue implemented using an array and maintaining a `front` and `rear` index.
+
+### Algorithm:
+
+1. **Initialize Queue:**
+   - Set `front` and `rear` to -1.
+
+2. **Check if Queue is Full:**
+   - Use `isFull` function to check if `rear` is at the last index (`MAX_SIZE - 1`). If true, the queue is full.
+
+3. **Check if Queue is Empty:**
+   - Use `isEmpty` function to check if `front` is -1. If true, the queue is empty.
+
+4. **Insert Element:**
+   - Use `insert` function:
+      - Check if the queue is full.
+      - If `front` is -1 (empty queue), set `front` to 0.
+      - Starting from the `rear`, shift elements to the right until finding the correct position for the new element based on priority.
+      - Increment `rear`.
+
+5. **Delete First Element:**
+   - Use `deleteFirst` function:
+      - Check if the queue is empty.
+      - Store the value of the first element (at index `front`).
+      - Shift the remaining elements to the left.
+      - If `front` becomes greater than `rear`, set `front` and `rear` to -1 (indicating an empty queue).
+
+6. **Display Elements:**
+   - Use `display` function:
+      - Check if the queue is empty.
+      - Display elements from `front` to `rear`.
+
+### Functions:
+
+- **initialize:**
+   - Set `front` and `rear` to -1.
+
+- **isFull:**
+   - Return true if `rear` is at the last index (`MAX_SIZE - 1`), else false.
+
+- **isEmpty:**
+   - Return true if `front` is -1, else false.
+
+- **insert:**
+   - Check if the queue is full.
+   - If `front` is -1, set `front` to 0.
+   - Starting from `rear`, shift elements to the right until finding the correct position for the new element based on priority.
+   - Increment `rear`.
+
+- **deleteFirst:**
+   - Check if the queue is empty.
+   - Store the value of the first element.
+   - Shift the remaining elements to the left.
+   - If `front` becomes greater than `rear`, set `front` and `rear` to -1.
+
+- **display:**
+   - Check if the queue is empty.
+   - Display elements from `front` to `rear`.
+
+### Time Complexity:
+- **Insertion and Deletion:**
+   - O(N) in the worst case, where N is the number of elements in the queue.
+   - However, if the elements are mostly sorted, the time complexity can be closer to O(1).
+
+This algorithm provides a basic outline for implementing an ascending priority queue using an array with the `front` and `rear` indices.

@@ -1,0 +1,40 @@
+Certainly! Here's a step-by-step algorithm for reversing a linked list in C:
+
+```plaintext
+Algorithm: Reverse a Linked List
+
+1. Initialize three pointers: prev, current, and next.
+   - Set prev to NULL.
+   - Set current to the head of the linked list.
+   - Set next to NULL.
+
+2. Traverse the linked list until the current pointer is NULL.
+   a. Store the next node of the current node in the next pointer.
+   b. Update the next of the current node to point to the previous node (reverse the link).
+   c. Move prev to the current node.
+   d. Move current to the next node.
+
+3. Update the head of the linked list to be the last node encountered (prev).
+
+Pseudocode:
+
+function reverseList(head):
+    // Step 1
+    prev = NULL
+    current = head
+    next = NULL
+
+    // Step 2
+    while current is not NULL:
+        next = current.next  // Store the next node
+        current.next = prev   // Reverse the link
+        prev = current        // Move prev to the current node
+        current = next        // Move current to the next node
+
+    // Step 3
+    head = prev
+
+    return head
+```
+
+This algorithm iterates through the linked list, reversing the direction of the links between nodes. At the end of the process, the head of the linked list is updated to point to the last node (which was the first node in the reversed order).

@@ -1,0 +1,45 @@
+Certainly! Here's a step-by-step algorithm to determine if an input string is of the form "x C y" using a stack:
+https://github.com/tejas-2000/tejas-2000/edit/LAB/string%20x%20C%20y.txt
+1. Create an empty stack to store characters.
+
+2. Scan the first half of the input string and push each character onto the stack.
+
+3. Skip the middle character if the length of the input string is odd.
+
+4. Scan the second half of the input string, and for each character:
+   - Pop a character from the stack.
+   - Compare the popped character with the current character from the second half.
+   - If they are not equal, the input string is not of the form "x C y."
+
+5. If the stack is empty after the second half is processed, the input string is of the form "x C y." Otherwise, it is not.
+
+Here's the algorithm in pseudocode:
+
+```plaintext
+function isFormXY(inputString):
+    stack = createEmptyStack()
+    length = lengthOfString(inputString)
+
+    // Step 2: Scan the first half of the input string
+    for i = 0 to length/2 - 1:
+        push(stack, inputString[i])
+
+    // Step 3: Skip the middle character for odd-length strings
+    if length is odd:
+        i = length/2 + 1
+    else:
+        i = length/2
+
+    // Step 4: Scan the second half of the input string
+    for ; i < length; i++:
+        poppedChar = pop(stack)
+
+        // Compare popped character with the current character from the second half
+        if inputString[i] ≠ poppedChar:
+            return false // Not of the form "x C y"
+
+    // Step 5: Check if the stack is empty
+    return isEmpty(stack)
+```
+
+Note: The `createEmptyStack()`, `push()`, `pop()`, and `isEmpty()` functions are assumed to be implemented according to the stack operations described in the previous C program.
